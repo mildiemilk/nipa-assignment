@@ -4,7 +4,6 @@ const callService = async (url, options) => {
   options.headers = {
     Authorization: process.env.REACT_APP_TOKEN,
   }
-  console.log("{ url, ...options }:", { url, ...options })
   return axios({ url, ...options }).then((response) => response.data)
 }
 
