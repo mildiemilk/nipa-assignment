@@ -26,7 +26,18 @@ class User {
     })
     return id
   }
+
+  async findAccountById({ accountId }) {
+    const docRef = await firestore.db.collection("info").doc(accountId).get()
+    return docRef.data()
+  }
   async update({ accountId, status }) {
+    const accountExist = await this.findAccountById({ accountId })
+    if (!accountExist) {
+      const error = new Error("Can't update, accountId not found")
+      error.statusCode = 400
+      throw error
+    }
     const docRef = firestore.db.collection("info").doc(accountId)
     await docRef.update({
       status,
