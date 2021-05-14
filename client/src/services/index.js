@@ -4,7 +4,9 @@ const callService = async (url, options) => {
   options.headers = {
     Authorization: process.env.REACT_APP_TOKEN,
   }
-  return axios({ url, ...options }).then((response) => response.data)
+  return axios({ url, ...options })
+    .then((response) => response.data)
+    .catch((e) => alert(e))
 }
 
 const apiService = {
