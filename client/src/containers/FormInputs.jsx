@@ -26,12 +26,16 @@ const getImageMime = (data) => {
 }
 
 const getObjectiveDetection = async (imageSrc) => {
-  const result = await uploadImage(imageSrc.split(";base64,")[1])
-  const rawData = result?.raw_data
-  if (rawData) {
-    const memeType = getImageMime(rawData)
-    const image = `data:${memeType};base64,${rawData}`
-    return image
+  try {
+    const result = await uploadImage(imageSrc.split(";base64,")[1])
+    const rawData = result?.raw_data
+    if (rawData) {
+      const memeType = getImageMime(rawData)
+      const image = `data:${memeType};base64,${rawData}`
+      return image
+    }
+  } catch(e) {
+    alert(e)
   }
 }
 
@@ -110,7 +114,7 @@ const RenderWebcam = ({ setImage, setTakeAPhoto, takeAPhoto }) => {
   )
 }
 
-const FormInputs = (props) => {
+const FormInputs = () => {
   const [image, setImage] = useState()
   const [isUploading, setIsUploading] = useState(false)
   const [takeAPhoto, setTakeAPhoto] = useState(false)
