@@ -15,7 +15,6 @@ function App() {
         <>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/form" render={() => <div>form</div>} />
           </Switch>
         </>
       </ConnectedRouter>
