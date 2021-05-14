@@ -36,6 +36,7 @@ const getObjectiveDetection = async (imageSrc) => {
     }
   } catch(e) {
     alert(e)
+    alert("Please reload(F5) this page")
   }
 }
 

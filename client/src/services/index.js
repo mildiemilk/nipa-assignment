@@ -6,7 +6,10 @@ const callService = async (url, options) => {
   }
   return axios({ url, ...options })
     .then((response) => response.data)
-    .catch((e) => alert(e))
+    .catch((e) => {
+      alert(e)
+      alert("Please reload(F5) this page")
+    })
 }
 
 const apiService = {
