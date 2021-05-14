@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react"
-import { Form, Button, Col, Row, Input } from "antd"
+import { Form, Button, Row } from "antd"
 import {
   LoadingOutlined,
   PlusOutlined,
@@ -80,10 +80,6 @@ const RenderWebcam = ({ setImage, setTakeAPhoto, takeAPhoto }) => {
     setIsTaking(false)
   }, [webcamRef])
 
-  const handleCancel = () => {
-    setIsTaking(false)
-  }
-
   return (
     <>
       {!takeAPhoto ? 
@@ -100,9 +96,6 @@ const RenderWebcam = ({ setImage, setTakeAPhoto, takeAPhoto }) => {
       : <div>
           <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
           <div className="flex justify-center p-2">
-            <Button onClick={handleCancel} className="flex justify-center">
-              Cancel
-            </Button>
             <Button
               onClick={handleCapturePhoto}
               className="flex justify-center flex-col-reverse"
@@ -118,7 +111,6 @@ const RenderWebcam = ({ setImage, setTakeAPhoto, takeAPhoto }) => {
 }
 
 const FormInputs = (props) => {
-  const { onFinishFailed, submitForm } = props
   const [image, setImage] = useState()
   const [isUploading, setIsUploading] = useState(false)
   const [takeAPhoto, setTakeAPhoto] = useState(false)
@@ -130,8 +122,6 @@ const FormInputs = (props) => {
     <>
       <Form
         layout="vertical"
-        onFinish={submitForm}
-        onFinishFailed={onFinishFailed}
       >
         <Row className="justify-center text-center">
           <Form.Item
@@ -160,7 +150,7 @@ const FormInputs = (props) => {
                 <img
                   src={image}
                   alt="avatar"
-                  width={200}
+                  width={500}
                   className="rounded-2xl"
                 />
                 <CloseOutlined
@@ -172,52 +162,6 @@ const FormInputs = (props) => {
             )}
           </Form.Item>
         </Row>
-          <Row>
-            <Col span={24}>          
-            <Form.Item
-              name="name"
-              label="Name"
-              rules={[{ required: true, message: "Please enter user name" }]}
-            >
-              <Input placeholder="Please enter user name" />
-            </Form.Item>
-            </Col>
-          </Row>
-          <Row >
-          <Col span={24}>   
-            <Form.Item
-              name="contacts"
-              label="Contacts"
-              rules={[{ required: true, message: "Please enter url" }]}
-            >
-              <Input placeholder="Please enter user name" />
-            </Form.Item>
-            </Col>
-          </Row>
-        <Row>
-        <Col span={24}>   
-            <Form.Item
-              name="description"
-              label="Description"
-              rules={[
-                {
-                  required: true,
-                  message: "please enter url description",
-                },
-              ]}
-            >
-              <Input.TextArea
-                rows={4}
-                placeholder="please enter url description"
-              />
-            </Form.Item>
-            </Col>
-        </Row>
-        <Form.Item className="text-right">
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
       </Form>
     </>
   )
